@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tabs</title>
+  <link rel="stylesheet" href="/css/design.css">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<header>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <a class="navbar-brand" href="#" style="color: #3CB371; font-size: 35px;">TraXersal</a>
+    <a class="navbar-brand" href="#" id="currentPark"
+      style="color: #3CB371; font: 20px Comic Sans MS; font-weight: lighter;">You are in Park of </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto"></ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    </div>
+    <div class="homeBt">
+      <form>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formmethod="GET" formaction='/'>Home</button>
+      </form>
+    </div>
+
+    <div class="LoginBt" style="margin-inline-start: 8px;">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="Login">Login</button>
+    </div>
+
+  </nav>
+
+</header>
+
+<body style="background-color:#516145;">
+
+  <div class="tabContainer">
+    <div class="buttonContainer">
+      <button onclick="showPanel(0,'#bee8ca')">Contact</button>
+      <button onclick="showPanel(1,'#bee8ca')">Event/Activities</button>
+      <button onclick="showPanel(2,'#bee8ca')">Campgrounds/Amenties</button>
+      <button onclick="showPanel(3,'#bee8ca')">Alerts</button>
+      <button onclick="showPanel(4,'#bee8ca')">Weather</button>
+      <button onclick="showPanel(5,'#bee8ca')">Multimedia</button>
+      <button onclick="showPanel(6,'#bee8ca')">Tours</button>
+    </div>
+    <div class="tabPanel" id="tab1"></div>
+    <div class="tabPanel" id="tab2">
+    </div>
+    <div class="tabPanel" id="tab3"></div>
+    <div class="tabPanel" id="tab4"></div>
+    <div class="tabPanel" id="tab5"></div>
+    <div class="tabPanel" id="tab6"></div>
+    <div class="tabPanel" id="tab7"></div>
+    <div class="tabPanel" id="tab8"></div>
+    <div class="tabPanel" id="tab9"></div>
+  </div>
+
+  <script src="/javascript/myScript.js"></script>
+
+  <script>
+    (function fetchDataTab12() {
+      fetch('https://developer.nps.gov/api/v1/parks?parkCode=<%=parkCode%>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+        .then(res => {
+          return res.json();
+        })
+        .then((park) => {
+          parkData = park.data[0]
+          console.log(parkData);
+          //-----------Tab1 Filling-----------------------
+          //Getting Park Name
+
+          // let header = document.createElement('h1');
+          //   let paragraph = document.createElement('p');
+          //   let category = alert.category;
+          //   let description = alert.description;
+
+          var p = document.createElement('h1');
+          var text = document.createTextNode(parkData.fullName);
+          var space = document.createElement('br');
+          p.appendChild(text);
+          var element = document.getElementById("tab1");
+          element.appendChild(p);
+          var parkelement = document.getElementById("currentPark");
+          parkelement.append(parkData.fullName);
+          //Getting Address
+          var p1 = document.createElement('h3');
+          var text1Raw = parkData.addresses[1].line1 + ' ' + parkData.addresses[1].city + ' ' + parkData.addresses[1].stateCode + ' ' + parkData.addresses[1].postalCode;
+          var text1 = document.createTextNode(text1Raw);
+          p1.append(text1);
+          element.append(p1);
+          //Getting Phone Numbers
+          var p2 = document.createElement('h4');
+          var space = document.createElement('br');
+          var text2 = document.createTextNode(parkData.contacts.phoneNumbers[0].phoneNumber);
+          p2.appendChild(text2);
+          element.appendChild(p2);
+          console.log(parkData.operatingHours[0].standardHours);
+          //Getting Operation Hours
+          for (let i = 0; i < 7; i++) {
+            if (i == 0) {
+              var p3 = document.createElement('p');
+              var text3 = document.createTextNode('Sunday: ' + parkData.operatingHours[0].standardHours.sunday);
+              p3.append(text3);
+              element.append(p3);
+            }
+            else if (i == 1) {
+              var p4 = document.createElement('p');
+              var text4 = document.createTextNode('Monday: ' + parkData.operatingHours[0].standardHours.monday);
+              p4.append(text4);
+              element.append(p4);
+            }
+            else if (i == 2) {
+              var p5 = document.createElement('p');
+              var text6 = document.createTextNode('Tuesday: ' + parkData.operatingHours[0].standardHours.tuesday);
+              p5.append(text6);
+              element.append(p5);
+            }
+            else if (i == 3) {
+              var p6 = document.createElement('p');
+              var text7 = document.createTextNode('Wednesday: ' + parkData.operatingHours[0].standardHours.wednesday);
+              p6.append(text7);
+              element.append(p6);
+            }
+            else if (i == 4) {
+              var p7 = document.createElement('p');
+              var text8 = document.createTextNode('Thursday: ' + parkData.operatingHours[0].standardHours.thursday);
+              p7.append(text8);
+              element.append(p7);
+            }
+            else if (i == 5) {
+              var p8 = document.createElement('p');
+              var text9 = document.createTextNode('Friday: ' + parkData.operatingHours[0].standardHours.friday);
+              p8.append(text9);
+              element.append(p8);
+            }
+            else if (i == 6) {
+              var p9 = document.createElement('p');
+              var text10 = document.createTextNode('Saturday: ' + parkData.operatingHours[0].standardHours.saturday);
+              p9.append(text10);
+              element.append(p9);
+            }
+
+
+
+          }
+
+
+
+
+          //-----------Tab2 Filling-----------------------
+          const eventName = parkData.activities.map(event => event.name);
+          var element2 = document.getElementById("tab2");
+          eventName.forEach(event => {
+            var p4 = document.createElement('p');
+            p4.append(event);
+            element2.append(p4);
+          });
+          //-----------Tab3 Filling-----------------------
+          //* Note ! Have to start a different API Fetch in function fetchDataTab3
+
+        })
+        .catch(error => console.log(error));
+    })();
+
+
+    (function fetchDataTab3() {
+      fetch('https://developer.nps.gov/api/v1/amenities/parksplaces?parkCode=<%=parkCode%>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+        .then(res => {
+          return res.json();
+        })
+        .then((park) => {
+          parkData = park.data[0]
+          console.log(parkData);
+          let amentiesName = parkData[0].name;
+          let element = document.getElementById("tab3");
+          element.append(amentiesName);
+          let space = document.createElement('br');
+          element.append(space);
+          let placesArr = parkData[0].parks[0].places;
+          let details = placesArr.map(place => {
+            return place.title;
+          });
+          let detailsInArr = Object.values(details);
+          detailsInArr.forEach(place => {
+            element.append(place);
+            let space = document.createElement('br');
+            element.append(space);
+          });
+          let url = parkData[0].parks[0].url;
+          let link = document.createElement('a');
+          link.append('Click here to visit the offical website for more information!')
+          link.href = url;
+          link.target = '_blank';
+          element.append(link);
+        })
+        .catch(error => console.log(error));
+    }
+    )();
+
+
+    (function fetchDataTab4() {
+      fetch('https://developer.nps.gov/api/v1/alerts?parkCode=<%=parkCode%>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+        .then(res => {
+          return res.json();
+        })
+        .then((park) => {
+          let parkData = park.data;
+          console.log(parkData);
+          let element = document.getElementById("tab4");
+          let category = parkData.category;
+          let space = document.createElement('br');
+          parkData.forEach(alert => {
+            let header = document.createElement('h1');
+            let paragraph = document.createElement('p');
+            let category = alert.category;
+            let description = alert.description;
+            header.append(category);
+            paragraph.append(description);
+            element.append(header);
+            element.append(paragraph);
+          });
+        })
+        .catch(error => console.log(error));
+    }
+    )();
+
+
+    (function fetchDataTab5() {
+      fetch('https://developer.nps.gov/api/v1/parks?parkCode=<%=parkCode%>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+        .then(res => {
+          return res.json();
+        })
+        .then((park) => {
+          let zip = park.data[0].addresses[0].postalCode;
+          console.log(zip);
+          return zip;
+        })
+        .then((zip) => {
+          fetch('https://api.weatherapi.com/v1/current.json?key=1d92743685794826afd50627221312&q=' + zip + '&aqi=no')
+            .then(res => {
+              return res.json();
+            })
+            .then((weather) => {
+              let weatherData = weather.current;
+              console.log(weatherData);
+              let element = document.getElementById("tab5");
+              let temp = weatherData.temp_f;
+              let condition = weatherData.condition.text;
+              let icon = weatherData.condition.icon;
+              let wind = weatherData.wind_mph;
+              let humidity = weatherData.humidity;
+              let feelsLike = weatherData.feelslike_f;
+              let space = document.createElement('br');
+              let tempP = document.createElement('p');
+              let conditionP = document.createElement('p');
+              let windP = document.createElement('p');
+              let humidityP = document.createElement('p');
+              let feelsLikeP = document.createElement('p');
+              let iconImg = document.createElement('img');
+              tempP.append('Temperature: ' + temp + 'F');
+              conditionP.append('Condition: ' + condition);
+              windP.append('Wind: ' + wind + 'mph');
+              humidityP.append('Humidity: ' + humidity + '%');
+              feelsLikeP.append('Feels Like: ' + feelsLike + 'F');
+              iconImg.src = icon;
+              element.append(tempP);
+              element.append(conditionP);
+              element.append(windP);
+              element.append(humidityP);
+              element.append(feelsLikeP);
+              element.append(iconImg);
+            })
+        })
+    })();
+
+
+    (function fetchDataTab6() {
+      fetch('https://developer.nps.gov/api/v1/multimedia/videos?parkCode=<%=parkCode%>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+        .then(res => {
+          return res.json();
+        })
+        .then((park) => {
+          let parkData = park.data;
+          console.log(parkData);
+          let element = document.getElementById("tab6");
+          parkData.forEach(video => {
+            console.log(video);
+            let header = document.createElement('h1');
+            let paragraph = document.createElement('p');
+            let title = video.title;
+            let description = video.description;
+            header.append(title);
+            paragraph.append(description);
+            element.append(header);
+            element.append(paragraph);
+            let url = video.permalinkUrl;
+            console.log(url);
+            // check if url exists
+            if (url != null) {
+              let link = document.createElement('a');
+              link.setAttribute('href', url);
+              link.append('Click to view!');
+              element.append(link);
+            }
+          });
+        })
+        .catch(error => console.log(error));
+    })();
+
+
+    (function fetchDataTab7() {
+      fetch('https://developer.nps.gov/api/v1/tours?parkCode=<%=parkCode%>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+        .then(res => {
+          return res.json();
+        })
+        .then((park) => {
+          let parkData = park.data;
+          console.log(parkData);
+          let element = document.getElementById("tab7");
+          parkData.forEach(tour => {
+            console.log(tour);
+            let header = document.createElement('h1');
+            let paragraph = document.createElement('p');
+            let title = tour.title;
+            let description = tour.description;
+            let url = tour.park.url;
+            let link = document.createElement('a');
+            link.setAttribute('href', url);
+            header.append(title);
+            paragraph.append(description);
+            link.append('Click to view more information on this tour!');
+            element.append(header);
+            element.append(paragraph);
+            element.append(link);
+          });
+
+        })
+        .catch(error => console.log(error));
+    })();
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>

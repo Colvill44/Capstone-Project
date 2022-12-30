@@ -1,0 +1,258 @@
+/* Nav bar */
+.homeBt{
+    margin-inline-start: 8px;
+}
+.LoginBt{
+    margin-inline-start: 8px;
+}
+
+.navbar-brand{
+    font: 20px Apple Chancery;
+    font-weight:bold;
+    margin: 5px;
+    padding: 20px;
+    
+}
+
+/* css for home page */
+
+body,html{
+    margin: auto;
+    background-color:#516145;
+}
+
+.mapFrame{
+    width: 800px; 
+    height: 467px; 
+    border: none;
+}
+
+.containerMap{
+    writing-mode: horizontal-tb;
+    margin-inline-start: 20px;
+    margin-top: 10px;  
+    float: left;
+    background-color: azure;
+    border: 2px solid rgb(14, 79, 42);
+}
+
+/* .containerStates{
+    list-style: none;
+    float: left;
+    margin-inline-start: 20px; 
+    writing-mode: horizontal-tb;
+    margin-top: 10px; 
+    border: 2px solid rgb(19, 162, 187);
+} */
+
+.list-group{
+    list-style: none;
+    float: left;
+    margin-inline-start: 20px; 
+    writing-mode: horizontal-tb;
+    margin-top: 10px; 
+    width: 10%;
+}
+
+/* photo change */
+.wrap {
+    writing-mode: horizontal-tb;
+    margin-inline-start: 20px;
+    margin-top: 10px;  
+    float: left;
+    width: 1100px;
+    height: 700px;
+    position: relative;
+}
+
+.list {
+    width: 1100px;
+    height: 700px;
+    position: relative;
+    padding-left: 0px;
+}
+
+.item {
+    width: 1100px;
+    height: 700px;
+    list-style: none;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transition: all .8s;
+}
+.item img{
+    width: 1100px;
+    height: 700px;
+}
+
+.item.active {
+    z-index: 10;
+    opacity: 1;
+}
+
+.btn1 {
+    width: 60px;
+    height: 100px;
+    z-index: 100;
+    top: 150px;
+    position: absolute;
+    background-color: rgba(0, 255, 255, 0);
+    border: none;
+}
+.btn2 {
+    width: 60px;
+    height: 100px;
+    z-index: 100;
+    top: 150px;
+    position: absolute;
+    background-color: rgba(0, 255, 255, 0);
+    border: none;
+}
+
+#leftBtn {
+    left: 0px;
+}
+
+#rightBtn {
+    right: 0px;
+}
+
+.pointList {
+    list-style: none;
+    padding-left: 0px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 200;
+}
+
+.point {
+    width: 10px;
+    height: 10px;
+    background-color: antiquewhite;
+    border-radius: 100%;
+    float: left;
+    margin-right: 8px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: slategray;
+    cursor: pointer;  
+}
+
+.point.active{
+    background-color: cadetblue;
+}
+
+
+
+
+
+
+/* css for state page */
+.stateName {
+    font-size: 20px;
+    margin-inline-start: 400px;
+    }
+
+#map{
+    margin-inline-start: 20px;
+    margin-top: 10px;
+    width: 1100px; 
+    height: 700px; 
+    border: none;
+    float: left;
+    background-color:#516145;
+    border: 5px;
+    }
+
+/* .info {
+    list-style: none;
+    float: left;
+    margin-inline-start: 20px;         
+    writing-mode: horizontal-tb;
+    margin-top: 10px; 
+    border: 2px solid rgb(19, 162, 187);
+    } */
+
+.list-group{
+    list-style: none;
+    float:left;
+    margin-inline-start: 20px;         
+    writing-mode: horizontal-tb;
+    margin-top: 10px; 
+    text-align: center;
+    width:20%
+    /* border: 2px solid rgb(19, 162, 187); */
+    }
+
+.llnumber{
+    float: right;
+    padding-top: 600px;
+    color: #516145;
+}
+
+
+/* Below is the tab page/ park detail  */
+.tabContainer{
+   margin-inline-start: 20px;
+   margin-top: 10px;
+   margin-inline-end: 20px;
+}
+
+.tabContainer .buttonContainer button {
+    font: 1.5em gill sans;
+    background-color: rgb(66, 67, 66);
+    color: rgb(106, 202, 111);
+    border: 1px solid rgb(87, 231, 106);
+    border-radius: 5px;
+    font-weight: lighter;
+}
+
+.tabContainer  .tabPanel{
+    padding: 20px;
+    font: 1.5em Helvetica;
+    font-weight: lighter;
+    margin: 2px;
+    border: 1px solid rgb(87, 231, 106);
+    border-radius: 5px;
+}
+
+
+
+/* tab page for tab1 content */
+#tab1 h1{
+    font: gill sans;
+    font: bold;
+    line-height: 80px;
+}
+
+#tab1 h3{
+    font: gill sans;
+    color: rgb(0, 0, 0);
+    font-weight: lighter;
+    text-shadow: #516145;
+    line-height: 30px;
+}
+
+#tab1 h4{
+    font: gill sans;
+    color: rgb(0, 0, 0);
+    font-weight: lighter;
+    text-shadow: #516145;
+    line-height: 30px;
+    padding-bottom: 50px;
+}
+
+#tab1 p{
+    font: 1em gill sans;
+    font-weight: lighter;
+    line-height: 5px;
+}
+
+
+
+
+
+
+

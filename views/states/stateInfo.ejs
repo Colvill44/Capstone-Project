@@ -1,0 +1,159 @@
+<! DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <title> State information </title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/design.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <a class="navbar-brand" href="#" style="color: #3CB371; font-size: 35px;">TraXersal</a>
+      <a class="navbar-brand" href="#" style="color: #3CB371; font: 20px Comic Sans MS; font-weight: lighter;">You are
+        in State of <%= state.name%></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto"></ul>
+  
+          <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+  
+      </div>
+      <div class="homeBt">
+        <form>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formmethod="GET"
+          formaction='/' style="float: left;">Home</button>
+        </form>
+      </div>
+      
+      
+  
+      <div class="LoginBt">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="Login">Login</button>
+      </div>
+  </nav>
+
+        
+   
+
+  </header>
+
+
+
+
+
+
+  <body style="background-color: #516145;">
+
+    <div id="map"></div>
+    <script>
+
+      (function () {
+        var s = document.createElement('script');
+        s.src = 'https://www.nps.gov/lib/npmap.js/4.0.0/npmap-bootstrap.js';
+        document.body.appendChild(s);
+      })();
+    </script>
+
+
+    <script>
+      const model = require('../models/states')
+
+      function initMap() {
+        // The location of the selected state
+        const stateLat = parseInt(document.getElementById("stateLat").innerHTML);
+        const stateLong = parseInt(document.getElementById("stateLong").innerHTML);
+        const state = { lat: stateLat, lng: stateLong };
+
+        // The map, centered at state
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 7,
+          center: state,
+        });
+        // The marker, positioned at selectedState
+        (function fetchData() {
+          fetch('https://developer.nps.gov/api/v1/parks?stateCode=<%= state.value %>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+            .then(res => {
+              return res.json();
+            })
+            .then((res) => {
+              const data = res.data;
+              for (data.park of data) {
+                const parkPoint = { lat: parseInt(data.park.latitude), lng: parseInt(data.park.longitude) }
+                let marker = new google.maps.Marker({
+                  position: parkPoint,
+                  map: map,
+                });
+
+              }
+
+
+            })
+            .catch(error => console.log(error));
+        })();
+
+      }
+    </script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTHDMhQbJiMsomY1VInOxX2ebn-bekgvc&callback=initMap&v=weekly"
+      defer></script>
+
+
+    <script>
+      (function fetchData() {
+        fetch('https://developer.nps.gov/api/v1/parks?stateCode=<%= state.value %>&api_key=9pmlVnQfy5VVDKxPYb8Du9UOMm6e5Nem5dGuLJL1')
+          .then(res => {
+            return res.json();
+          })
+          .then((res) => {
+            const data = res.data;
+            for (data.park of data) {
+              console.log(data.park);
+              // append data to div class called info
+              var a = document.createElement('a');
+              a.className = "list-group-item list-group-item-action list-group-item-success";
+              var link = document.createTextNode(data.park.fullName);
+              a.appendChild(link);
+              var parkCode = data.park.parkCode;       //Using parkCode as a identifier
+              a.href = "/states/<%=state.value%>/" + parkCode; //Routing for the third Page
+              var space = document.createElement('br');
+              a.appendChild(space);
+              var element = document.getElementById("info");
+              element.append(a);
+            }
+
+
+          })
+          .catch(error => console.log(error));
+      })();
+    </script>
+
+
+    <div class="list-group" id="info" style="width: 750px;">
+
+
+    </div>
+
+
+
+
+    </div>
+
+    <div class="llnumber">
+      <p id="stateLat">
+        <%= state.lat%>
+      </p>
+      <p id="stateLong">
+        <%= state.long%>
+      </p>
+    </div>
+
+
+  </body>
+
+  </html
