@@ -44,7 +44,6 @@ const states = [
     { value: 'SC', name: 'South Carolina', lat: '33.836082', long: '-81.163727' },
     { value: 'SD', name: 'South Dakota', lat: '44.500000', long: '-100.000000' },
     { value: 'TN', name: 'Tennessee', lat: '35.860119', long: '-86.660156' },
-    { value: 'TX', name: 'Texas', lat: '31.000000', long: '-100.000000' },
     { value: 'UT', name: 'Utah', lat: '39.419220', long: '-111.950684' },
     { value: 'VA', name: 'Virginia', lat: '37.926868', long: '-78.024902' },
     { value: 'VT', name: 'Vermont', lat: '39.833851', long: '-74.871826' },
